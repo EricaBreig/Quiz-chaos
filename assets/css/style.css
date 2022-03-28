@@ -1,0 +1,44 @@
+body {
+    background-image:url("../images/tommyswag.png");
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+header {
+    border:3px solid black;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.final-score {
+    border: 3px solid black;
+    display: flex;
+    justify-content: center;
+}
+.timer {
+    border: 3px solid black;
+    display:flex;
+
+}
+.intro {
+    border:3px solid black;
+    height: 500px;
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center; 
+}
+
+#introwords {
+    border:3px solid black;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.startbutton {
+border:3px solid black;
+height: 100px;
+
+}

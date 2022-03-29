@@ -1,3 +1,5 @@
+/// the following is used for reference only as a learning tool
+
 import "./styles.css";
 var screen0Ele = document.querySelector("#screen0");
 var screen0ButtonEle = screen0Ele.querySelector("button");

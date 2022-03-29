@@ -123,11 +123,13 @@ function startQuiz() {
   questionsList.append(choiceC);
   questionsList.append(choiceD);
 }
-startButton = startQuiz(){
-    startButton.addEventListener("click", function () 
+
+// this is where i got stuck.
+// startButton = startQuiz(){
+//     startButton.addEventListener("click", function () 
    
     
-}
+// }
 
 
 function compare(event) {

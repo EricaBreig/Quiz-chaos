@@ -8,7 +8,7 @@ var highScoreContainer = document.querySelector(".finalscore");
 //Questions -- array of objects
 var questions = [
   {
-      //Question 1
+    //Question 1
     question: "What is my favorite color?",
     choiceA: "Purple",
     choiceB: "Blue",
@@ -17,7 +17,7 @@ var questions = [
     correctAnswer: choiceD,
   },
   {
-      //Question 2
+    //Question 2
     question: "How many royal toots do I give right now?",
     choiceA: "None",
     choiceB: "Infinitely none",
@@ -26,7 +26,7 @@ var questions = [
     correctAnswer: choiceB,
   },
   {
-      //Question 3
+    //Question 3
     question: "How bored are you right now?",
     choiceA: "super bored",
     choiceB: "super forking bored",
@@ -35,7 +35,7 @@ var questions = [
     correctAnswer: choiceD,
   },
   {
-      //Question 4
+    //Question 4
     question: "What is the answer to this question?",
     choiceA: "what",
     choiceB: "heck if I know, I'm just grading this quiz",
@@ -44,7 +44,7 @@ var questions = [
     correctAnswer: choiceB,
   },
   {
-      //Question 5
+    //Question 5
     question: "If I was a type of cheese, which one would I be?",
     choiceA: "American",
     choiceB: "cheddar",
@@ -53,7 +53,7 @@ var questions = [
     correctAnswer: choiceD,
   },
   {
-      //Question 6
+    //Question 6
     question: "What does Zydrate come in?",
     choiceA: "A little glass vial",
     choiceB: "a plastic baggie",
@@ -62,7 +62,7 @@ var questions = [
     correctAnswer: choiceA,
   },
   {
-      //Question 7
+    //Question 7
     question: "And the little glass vial goes into the gun like a battery;",
     choiceA: "okay...",
     choiceB: "uhhh..?",
@@ -71,7 +71,7 @@ var questions = [
     correctAnswer: choiceD,
   },
   {
-      //Question 8
+    //Question 8
     question:
       "And when the gun goes off, it sparks, and you're ready for _____",
     choiceA: "death",
@@ -81,7 +81,7 @@ var questions = [
     correctAnswer: choiceC,
   },
   {
-      //Question 9
+    //Question 9
     question: "Ok, enough of that -- What am I thinking about right now?",
     choiceA: "Sleep, probs",
     choiceB: "eating, probs",
@@ -90,7 +90,7 @@ var questions = [
     correctAnswer: choiceA,
   },
   {
-      //Question 10
+    //Question 10
     question: "What is love?",
     choiceA: "oh baby don't hurt me",
     choiceB: "don't hurt me",
@@ -109,50 +109,32 @@ function startQuiz() {
   var choiceB = document.createElement("li");
   var choiceC = document.createElement("li");
   var choiceD = document.createElement("li");
+  var correctAnswer = questions[currentIndex].correctAnswer;
 
-  questionString.innerHTML = currentQuestion.question(0);
+  questionString.innerHTML = currentQuestion.question;
+  choiceA.innerHTML = currentQuestion.choiceA;
+  choiceB.innerHTML = currentQuestion.choiceB;
+  choiceC.innerHTML = currentQuestion.choiceC;
   choiceD.innerHTML = currentQuestion.choiceD;
-//   questionsList.append(choiceD);
-//   quizContainer.append(questionString);
-//   questionString.innerHTML = currentQuestion.question;
-//   choiceB.innerHTML = currentQuestion.choiceB;
-//   questionsList.append(choiceA);
-//   quizContainer.append(questionString);
-//   questionString.innerHTML = currentQuestion.question;
-//   choiceD.innerHTML = currentQuestion.choiceD;
-//   questionsList.append(choiceA);
-//   quizContainer.append(questionString);
-//   questionString.innerHTML = currentQuestion.question;
-//   choiceB.innerHTML = currentQuestion.choiceB;
-//   questionsList.append(choiceA);
-//   quizContainer.append(questionString);
-//   questionString.innerHTML = currentQuestion.question;
-//   choiceD.innerHTML = currentQuestion.choiceD;
-//   questionsList.append(choiceA);
-//   quizContainer.append(questionString);
-//   questionString.innerHTML = currentQuestion.question;
-//   choiceA.innerHTML = currentQuestion.choiceA;
-//   questionsList.append(choiceA);
-//   quizContainer.append(questionString);
-//   questionString.innerHTML = currentQuestion.question;
-//   choiceD.innerHTML = currentQuestion.choiceD;
-//   questionsList.append(choiceA);
-//   quizContainer.append(questionString);
-//   questionString.innerHTML = currentQuestion.question;
-//   choiceC.innerHTML = currentQuestion.choiceC;
-//   questionsList.append(choiceA);
-//   quizContainer.append(questionString);
-//   questionString.innerHTML = currentQuestion.question;
-//   choiceA.innerHTML = currentQuestion.choiceA;
-//   questionsList.append(choiceA);
-//   quizContainer.append(questionString);
-//   questionString.innerHTML = currentQuestion.question;
-//   choiceD.innerHTML = currentQuestion.choiceD;
-
-  questionsList.append(choiceD);
+  correctAnswer.innerHTML = currentQuestion.correctAnswer;
   quizContainer.append(questionString);
+  questionsList.append(choiceA);
+  questionsList.append(choiceB);
+  questionsList.append(choiceC);
+  questionsList.append(choiceD);
 }
+startButton = startQuiz(){
+    startButton.addEventListener("click", function () 
+   
+    
+}
+
+
 function compare(event) {
+  var userSelect = questionsList.querySelector("li");
+  if (userSelect == correctAnswer)
+  console.log("correct")
+
   // console.log(event.target)
   // check if is right or wrong
   // if wrong give a penalty

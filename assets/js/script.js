@@ -48,7 +48,7 @@ var questions = [
     question: "If I was a type of cheese, which one would I be?",
     choiceA: "American",
     choiceB: "cheddar",
-    choiceC: "wenslydale",
+    choiceC: "wensleydale",
     choiceD: "pickles",
     correctAnswer: choiceD,
   },
@@ -123,7 +123,7 @@ function startQuiz() {
   questionsList.append(choiceC);
   questionsList.append(choiceD);
 }
-
+console.log(startQuiz());
 // this is where i got stuck.
 // startButton = startQuiz(){
 //     startButton.addEventListener("click", function () 

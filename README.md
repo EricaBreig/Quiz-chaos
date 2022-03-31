@@ -7,6 +7,6 @@ For this assignment, I was tasked with creating a timed multiple choice quiz.  W
 - Utilizing objects within arrays
 - utilizing set interval timer
 - utilizing the compare function
-![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over ](./Assets/04-web-apis-homework-demo.gif)
+![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over ](./assets/images/)
 # Credit:
-Me, with the help of my TAs and my tutor
+Me, with the help of my TAs and my tutor, and lots of blood, sweat and tears

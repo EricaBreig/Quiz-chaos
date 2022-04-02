@@ -2,7 +2,7 @@
 var startButton = document.querySelector("#start");
 var intro = document.querySelector(".intro");
 var timerEl = document.querySelector(".timer");
-var quizContainer = document.querySelector(".quiz");
+var quizContainer = document.querySelector("#quiz");
 var highScoreContainer = document.querySelector(".finalscore");
 var secondsLeft = 100;
 // Countdown Timer
@@ -128,6 +128,9 @@ startButton.addEventListener("click", function () {
   console.log("it's working");
   intro.classList.add("hide");
 });
+
+//Answer selection, changing screen, and affecting the timer
+
 
 //experimental janky shit ===========================================================================================
 // Start the quiz function

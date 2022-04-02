@@ -9,4 +9,4 @@ For this assignment, I was tasked with creating a timed multiple choice quiz.  W
 - utilizing the compare function
 ![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over ](./assets/images/)
 # Credit:
-Me, with the help of my TAs and my tutor, and lots of blood, sweat and tears
+Me, and lots of blood, sweat and tears

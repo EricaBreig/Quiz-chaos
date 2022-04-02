@@ -45,6 +45,12 @@ height: 100px;
     display: none;
 }
 
-.quiz {
+#quiz {
     background-color: antiquewhite;
+}
+
+#question-box{
+    width: 50vw;
+    height: 100vh;
+    position: relative;
 }

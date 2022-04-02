@@ -8,26 +8,30 @@
     <title>Le Quiz!</title>
   </head>
   <body>
-    <header> 
+    <header>
       <h1 class="final-score">Your Score:</h1>
-      <h2 class="timer"> time left:</h2>
+      <h2 class="timer">time left:</h2>
     </header>
     <div class="intro" id="intro-poof">
       <p id="intro-words">
-        Hey there!  For whatever reason, (most likely you're the person grading my assingment), you have to endure my first quiz!  See if you can answer a series of questions.  But beware: per our assignment instructions, this quiz is timed, and if you get a question wrong, you lose time! Good luck, gumshoe.
+        Hey there! For whatever reason, (most likely you're the person grading
+        my assingment), you have to endure my first quiz! See if you can answer
+        a series of questions. But beware: per our assignment instructions, this
+        quiz is timed, and if you get a question wrong, you lose time! Good
+        luck, gumshoe.
       </p>
       <button class="start-button" id="start">Start</button>
     </div>
-    <section id="quiz" class="hide">
-      <div id="question-box">
-    <ul>What is the answer to this question?
-      <li>Choice 1 </li>
-      <li>Choice 2</li>
-      <li>Choice 3</li>
-      <li>Choice 4</li>
-    </ul> </div>
-  </section>
-    <div class="finalscore"></div>
+    <section id="quiz"></section>
+    <!-- <section class="lose hide"></section> -->
+    <section class="finalscore hide">
+      <label for="user">Your Initials</label>
+      <input type="text"/>
+      <button class="submit">Submit yo shit</button>
+    </section>
+    <section class="highScores hide">
+      ldkshlahgiehlihq
+    </section>
     <script src="./develop/js/script.js"></script>
   </body>
 </html>

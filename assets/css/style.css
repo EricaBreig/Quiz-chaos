@@ -10,11 +10,19 @@ header {
     justify-content: space-around;
     align-items: center;
 }
-.final-score {
+.your-score {
     border: 3px solid black;
     display: flex;
     justify-content: center;
 }
+.highScores {
+background-color: antiquewhite;
+}
+
+.finalscores {
+    background-color: antiquewhite;
+}
+
 .timer {
     border: 3px solid black;
     display:flex;

@@ -4,19 +4,25 @@ var intro = document.querySelector(".intro");
 var timerEl = document.querySelector(".timer");
 var quizContainer = document.querySelector("#quiz");
 var finalScoreContainer = document.querySelector(".finalscore");
-var secondsLeft = 5;
+var score = 0;
+var secondsLeft = 65;
+var penalty = 5;
+var holdInterval = 0;
 var currentQuestionIndex = 0;
 var scoreScreen = document.querySelector(".highScores");
+var scoresList = document.querySelector(".scoreslist")
 var submitButton = document.querySelector(".submit");
+
 
 // Countdown Timer
 function timer() {
   var countDown = setInterval(function () {
     secondsLeft--;
-    timerEl.textContent = secondsLeft + " seconds left";
+    timerEl.textContent ="Time Left: " + secondsLeft + "seconds";
     if (secondsLeft === 0) {
       // Stops execution of action at set interval
       clearInterval(countDown);
+
       // quizContainer.classList.add("hide");
       // Calls function to create and append image
       sendMessage();
@@ -29,27 +35,27 @@ function sendMessage() {
   finalScoreContainer.classList.remove("hide");
   timerEl.textContent = " ";
   var imgEl = document.createElement("img");
-  imgEl.setAttribute("src", "./assets/images/timeisup.jpeg");
+  imgEl.setAttribute("src", "./assets/images/itsover.png");
+  imgEl.style.height = "600px";
+  imgEl.style.width = "750px";
   finalScoreContainer.appendChild(imgEl);
 }
-//Questions -- array of objects
+//Questions, typed out as an array of arrays
 var questions = [
   {
     //Question 1
-    question: "What is my favorite color?",
-    // choiceA: "Purple",
-    // choiceB: "Blue",
-    // choiceC: "Pink",
-    // choiceD: "All of the above",
-    choices: ["Purple", "Blue", "Pink", "All of the above"],
+    question: "Which one of these Pie decimals is legit?",
+    choices: [
+      "3.141592653583793238",
+      "3.141592653589739238",
+      "3.141592565389793238",
+      "3.141592653589793238",
+    ],
     correctAnswer: 3,
   },
   {
     //Question 2
     question: "How many royal toots do I give right now?",
-    // choiceA: "None",
-    // choiceB: "Infinitely none",
-    // choiceC: "maybe half a toot",
     choices: [
       "None",
       "Infinitely none",
@@ -86,52 +92,57 @@ var questions = [
     choices: ["American", "cheddar", "wensleydale", "pickles"],
     correctAnswer: 3,
   },
-  // {
-  //   //Question 6
-  //   question: "What does Zydrate come in?",
-  //   choiceA: "A little glass vial",
-  //   choiceB: "a plastic baggie",
-  //   choiceC: "a cardboard box",
-  //   choiceD: "what the hell is zydrate?",
-  //   correctAnswer: "choiceA",
-  // },
-  // {
-  //   //Question 7
-  //   question: "And the little glass vial goes into the gun like a battery;",
-  //   choiceA: "okay...",
-  //   choiceB: "uhhh..?",
-  //   choiceC: "what",
-  //   choiceD: "And the zydrate gun goes somewhere against your anatomy.",
-  //   correctAnswer: "choiceD",
-  // },
-  // {
-  //   //Question 8
-  //   question:
-  //     "And when the gun goes off, it sparks, and you're ready for _____",
-  //   choiceA: "death",
-  //   choiceB: "sleep",
-  //   choiceC: "surgery",
-  //   choiceD: "hecc if I know",
-  //   correctAnswer: "choiceC",
-  // },
-  // {
-  //   //Question 9
-  //   question: "Ok, enough of that -- What am I thinking about right now?",
-  //   choiceA: "Sleep, probs",
-  //   choiceB: "eating, probs",
-  //   choiceC: "cuddling the kitties",
-  //   choiceD: "finishing this assignment",
-  //   correctAnswer: "choiceA",
-  // },
-  // {
-  //   //Question 10
-  //   question: "What is love?",
-  //   choiceA: "oh baby don't hurt me",
-  //   choiceB: "don't hurt me",
-  //   choiceC: "no more",
-  //   choiceD: "all of the above",
-  //   correctAnswer: "choiceD",
-  // },
+  {
+    //Question 6
+    question: "What does Zydrate come in?",
+    choices: [
+      "A little glass vial",
+      "a plastic baggie",
+      "a cardboard box",
+      "what the hell is zydrate?",
+    ],
+    correctAnswer: 0,
+  },
+  {
+    //Question 7
+    question: "And the little glass vial goes into the gun like a battery;",
+    choices: [
+      "what",
+      "okay...",
+      "uhhh..?",
+      "And the zydrate gun goes somewhere against your anatomy.",
+    ],
+    correctAnswer: 3,
+  },
+  {
+    //Question 8
+    question:
+      "And when the gun goes off, it sparks, and you're ready for _____",
+    choices: ["death", "sleep", "surgery", "hecc if I know"],
+    correctAnswer: 3,
+  },
+  {
+    //Question 9
+    question: "Ok, enough of that -- What am I thinking about right now?",
+    choices: [
+      "Sleep, probs",
+      "eating, probs",
+      "cuddling the kitties",
+      "finishing this assignment",
+    ],
+    correctAnswer: 0,
+  },
+  {
+    //Question 10
+    choices: [
+      "What is love?",
+      "oh baby don't hurt me",
+      "don't hurt me",
+      "no more",
+      "all of the above",
+    ],
+    correctAnswer: 3,
+  },
 ];
 
 // Button that starts the quiz~
@@ -148,7 +159,7 @@ submitButton.addEventListener("click", function () {
   scoreScreen.classList.remove("hide");
 });
 
-// Make the intro disappear, and the first question appear
+// The function that goes through the questions 
 function startQuiz() {
   if (currentQuestionIndex < questions.length) {
     // for (var i = 0; i<questions.length; i++){
@@ -167,31 +178,109 @@ function startQuiz() {
     quizContainer.appendChild(questionsList);
     console.log(currentQuestion.choices);
 
-    for (var j = 0; j < currentQuestion.choices.length; j++) {
+    for (var i = 0; i < currentQuestion.choices.length; i++) {
       var liEl = document.createElement("li");
       questionsList.appendChild(liEl);
-      liEl.textContent = currentQuestion.choices[j];
+      liEl.textContent = currentQuestion.choices[i];
+      // clearInterval(countDown);
     }
     questionsList.addEventListener("click", function (event) {
+      var createDiv = document.createElement("div");
+      createDiv.setAttribute("id", "createDiv");
       var target = event.target;
       var userChoice = target.textContent;
       var correctAnswerIndex = currentQuestion.correctAnswer;
       currentQuestion.choices[correctAnswerIndex];
       if (currentQuestion.choices[correctAnswerIndex] === userChoice) {
         console.log("Correct!");
+        score++;
+            createDiv.textContent = "HECK YES!  You're so smart!"
       } else {
         console.log("WRONNNNNG");
-        //decrease time here
-      }
+          // Will deduct -10 seconds off the time interval of secondsLeft for wrong answers
+          secondsLeft = secondsLeft - penalty;
+          createDiv.textContent = ">:[ Wrong! The correct answer is:  " + questions[correctAnswerIndex].correctAnswer;
+          
+      } 
       quizContainer.innerHTML = "";
       currentQuestionIndex++;
+
       startQuiz();
     });
-  } else {
   }
 }
+// All done will append last page
+function allDone() {
+  finalScoreContainer.innerHTML = "";
+  currentTime.innerHTML = "";
+  finalScoreContainer.classList.add("hide");
+  scoreScreen.classList.remove("hide");
+  timerEl.textContent = " ";
+  var imgEl = document.createElement("img");
+  imgEl.setAttribute("src", "./assets/images/itsover.png");
+  imgEl.style.height = "600px";
+  imgEl.style.width = "750px";
+  finalScoreContainer.appendChild(imgEl);
+}
+  // // // Heading:
+  // // var createH1 = document.createElement("h1");
+  // // createH1.setAttribute("id", "createH1");
+  // // createH1.textContent = "All Done!"
 
-//Answer selection, changing screen, and affecting the timer
+  // questionsDiv.appendChild(createH1);
+
+  // // Paragraph
+  // var createP = document.createElement("p");
+  // createP.setAttribute("id", "createP");
+
+  // questionsDiv.appendChild(createP);
+
+  // Calculates time remaining and replaces it with score
+  if (secondsLeft >= 0) {
+      var timeRemaining = secondsLeft;
+      var yourScore = document.querySelector(".your-score");
+      clearInterval(holdInterval);
+      yourScore.textContent = "Your final score is: " + timeRemaining;
+
+      scoreScreen.appendChild("your-score");
+  };
+
+ // Question Index determines number question user is on
+ var createDiv = document.createElement("div");
+//  currentQuestionIndex++;
+
+ if (currentQuestionIndex >= questions.length) {
+     // All done will append last page with user stats
+     allDone();
+     createDiv.textContent = "End of quiz!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
+ } else {
+     render(questionsList);
+ }
+ finalScoreContainer.appendChild();
+
+
+// Event listener to clear scores
+var clear = document.querySelector("#clear");
+var goBack = document.querySelector("#goBack");
+clear.addEventListener("click", function () {
+  localStorage.clear();
+  location.reload();
+});
+// Retreives local stroage
+var allScores = localStorage.getItem("allScores");
+allScores = JSON.parse(allScores);
+
+if (allScores !== null) {
+  for (var i = 0; i < allScores.length; i++) {
+    var createLi = document.createElement("li");
+    createLi.textContent = allScores[i].initials + " " + allScores[i].score;
+    scoresList.appendChild(createLi);
+    console.log(scoresList);
+  }
+};
+
+
+
 
 //experimental janky shit ===========================================================================================
 // Start the quiz function
@@ -238,4 +327,4 @@ function startQuiz() {
 //     console.log(currentQuestion.correctAnswer)
 
 // }
-// console.log(questions);
+// console.log(questions)

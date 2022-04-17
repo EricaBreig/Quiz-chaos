@@ -7,19 +7,18 @@ var finalScoreContainer = document.querySelector(".finalscore");
 var score = 0;
 var secondsLeft = 100;
 var penalty = 5;
-var holdInterval = 0;
+var delay = 3;
 var currentQuestionIndex = 0;
 var scoreScreen = document.querySelector(".highScores");
-var scoresList = document.querySelector(".scoreslist")
+var scoresList = document.querySelector(".scoreslist");
 var submitButton = document.querySelector(".submit");
-
 
 // Countdown Timer
 function timer() {
   var countDown = setInterval(function () {
     secondsLeft--;
-    timerEl.textContent ="Time Left: " + secondsLeft + "seconds";
-    if (secondsLeft === 0) {
+    timerEl.textContent = "Time Left: " + secondsLeft + "seconds";
+    if (secondsLeft === 0 || currentQuestionIndex == questions.length) {
       // Stops execution of action at set interval
       clearInterval(countDown);
 
@@ -29,6 +28,19 @@ function timer() {
     }
   }, 1000);
 }
+
+
+
+// Calculates time remaining and replaces it with score
+//   if (secondsLeft >= 0) {
+//     var timeRemaining = secondsLeft;
+//     var yourScore = document.querySelector(".your-score");
+//     // clearInterval(holdinterval);
+//     yourScore.textContent = "Your final score is: " + timeRemaining;
+
+//     scoreScreen.appendChild("your-score");
+// };
+
 //Once time runs out, this sends a message with image describing that it's over and that the user has lost
 function sendMessage() {
   quizContainer.classList.add("hide");
@@ -149,7 +161,6 @@ var questions = [
 startButton.addEventListener("click", function () {
   startQuiz();
   timer();
-  console.log("it's working");
   intro.classList.add("hide");
 });
 
@@ -159,17 +170,14 @@ submitButton.addEventListener("click", function () {
   scoreScreen.classList.remove("hide");
 });
 
-// The function that goes through the questions 
+// The function that goes through the questions
 function startQuiz() {
+  quizContainer.innerHTML = "";
   if (currentQuestionIndex < questions.length) {
     // for (var i = 0; i<questions.length; i++){
     var currentQuestion = questions[currentQuestionIndex];
     var questionString = document.createElement("h3");
     var questionsList = document.createElement("ul");
-    // var choiceA = document.createElement("li");
-    // var choiceB = document.createElement("li");
-    // var choiceC = document.createElement("li");
-    // var choiceD = document.createElement("li");
     var correctAnswer = questions[currentQuestionIndex].correctAnswer;
     questionString.textContent = currentQuestion.question;
     quizContainer.appendChild(questionString);
@@ -183,30 +191,42 @@ function startQuiz() {
       questionsList.appendChild(liEl);
       liEl.textContent = currentQuestion.choices[i];
       // clearInterval(countDown);
-    }
-    questionsList.addEventListener("click", function (event) {
-      var createDiv = document.createElement("div");
-      createDiv.setAttribute("id", "createDiv");
-      var target = event.target;
-      var userChoice = target.textContent;
-      var correctAnswerIndex = currentQuestion.correctAnswer;
-      currentQuestion.choices[correctAnswerIndex];
-      if (currentQuestion.choices[correctAnswerIndex] === userChoice) {
-        console.log("Correct!");
-        score++;
-            createDiv.textContent = "HECK YES!  You're so smart!"
-      } else {
-        console.log("WRONNNNNG");
-          // Will deduct -10 seconds off the time interval of secondsLeft for wrong answers
+      liEl.addEventListener("click", function (event) {
+        var createDiv = document.createElement("div");
+        createDiv.setAttribute("id", "createDiv");
+        var target = event.target;
+        var userChoice = target.textContent;
+        var correctAnswerIndex = currentQuestion.correctAnswer;
+        currentQuestion.choices[correctAnswerIndex];
+        if (currentQuestion.choices[correctAnswerIndex] === userChoice) {
+          console.log("Correct!");
+          score++;
+          createDiv.textContent = "HECK YES!  You're so smart!";
+          quizContainer.append(createDiv);
+        } else {
+          console.log("WRONNNNNG");
+          // Will deduct -5 seconds off the time interval of secondsLeft for wrong answers
           secondsLeft = secondsLeft - penalty;
-          createDiv.textContent = ">:[ Wrong! The correct answer is:  " + questions[correctAnswerIndex].correctAnswer;
-          
-      } 
-      quizContainer.innerHTML = "";
-      currentQuestionIndex++;
-
-      startQuiz();
-    });
+          createDiv.textContent =
+            ">:[ Wrong! The correct answer is:  " +
+            questions[correctAnswerIndex].correctAnswer;
+          quizContainer.append(createDiv);
+        }
+       // this delay isnt working
+      
+        var timeBetween = setInterval(function(){
+          if (delay < 0 ){
+            console.log("running the delay")
+            quizContainer.innerHTML="";
+            clearInterval(timeBetween)
+            currentQuestionIndex++;
+            startQuiz();
+          }
+        }
+        ,1000
+        )
+      });
+    }
   }
 }
 // All done will append last page
@@ -222,42 +242,31 @@ function allDone() {
   imgEl.style.width = "750px";
   finalScoreContainer.appendChild(imgEl);
 }
-  // // // Heading:
-  // // var createH1 = document.createElement("h1");
-  // // createH1.setAttribute("id", "createH1");
-  // // createH1.textContent = "All Done!"
+// // // Heading:
+// // var createH1 = document.createElement("h1");
+// // createH1.setAttribute("id", "createH1");
+// // createH1.textContent = "All Done!"
 
-  // questionsDiv.appendChild(createH1);
+// questionsDiv.appendChild(createH1);
 
-  // // Paragraph
-  // var createP = document.createElement("p");
-  // createP.setAttribute("id", "createP");
+// // Paragraph
+// var createP = document.createElement("p");
+// createP.setAttribute("id", "createP");
 
-  // questionsDiv.appendChild(createP);
+// questionsDiv.appendChild(createP);
 
-  // Calculates time remaining and replaces it with score
-  if (secondsLeft >= 0) {
-      var timeRemaining = secondsLeft;
-      var yourScore = document.querySelector(".your-score");
-      clearInterval(holdInterval);
-      yourScore.textContent = "Your final score is: " + timeRemaining;
-
-      scoreScreen.appendChild("your-score");
-  };
-
- // Question Index determines number question user is on
- var createDiv = document.createElement("div");
+// Question Index determines number question user is on
+//  var createDiv = document.createElement("div");
 //  currentQuestionIndex++;
 
- if (currentQuestionIndex >= questions.length) {
-     // All done will append last page with user stats
-     allDone();
-     createDiv.textContent = "End of quiz!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
- } else {
-     render(questionsList);
- }
- finalScoreContainer.appendChild();
-
+//  if (currentQuestionIndex >= questions.length) {
+// All done will append last page with user stats
+//  allDone();
+//  createDiv.textContent = "End of quiz!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
+//  } else {
+//  render(questionsList);
+//  }
+//  finalScoreContainer.appendChild(createDiv);
 
 // Event listener to clear scores
 var clear = document.querySelector("#clear");
@@ -277,10 +286,7 @@ if (allScores !== null) {
     scoresList.appendChild(createLi);
     console.log(scoresList);
   }
-};
-
-
-
+}
 
 //experimental janky shit ===========================================================================================
 // Start the quiz function

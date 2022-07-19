@@ -1,4 +1,4 @@
-# Homework 4 - Multiple choice timed Quiz
+# Multiple choice timed Quiz
 ## Link to the deployed page:
 [Erica's Quiz](https://ericabreig.github.io/hw-4-quiz/)
 # Description:

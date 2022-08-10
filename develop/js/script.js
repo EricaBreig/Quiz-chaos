@@ -243,30 +243,30 @@ function allDone() {
   finalScoreContainer.appendChild(imgEl);
 }
 // // // Heading:
-// // var createH1 = document.createElement("h1");
-// // createH1.setAttribute("id", "createH1");
-// // createH1.textContent = "All Done!"
+var createH1 = document.createElement("h1");
+createH1.setAttribute("id", "createH1");
+createH1.textContent = "All Done!"
 
-// questionsDiv.appendChild(createH1);
+questionsDiv.appendChild(createH1);
 
 // // Paragraph
-// var createP = document.createElement("p");
-// createP.setAttribute("id", "createP");
+var createP = document.createElement("p");
+createP.setAttribute("id", "createP");
 
-// questionsDiv.appendChild(createP);
+questionsDiv.appendChild(createP);
 
 // Question Index determines number question user is on
-//  var createDiv = document.createElement("div");
-//  currentQuestionIndex++;
+ var createDiv = document.createElement("div");
+ currentQuestionIndex++;
 
-//  if (currentQuestionIndex >= questions.length) {
+ if (currentQuestionIndex >= questions.length) {
 // All done will append last page with user stats
-//  allDone();
-//  createDiv.textContent = "End of quiz!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
-//  } else {
-//  render(questionsList);
-//  }
-//  finalScoreContainer.appendChild(createDiv);
+ allDone();
+ createDiv.textContent = "End of quiz!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
+ } else {
+ render(questionsList);
+ }
+ finalScoreContainer.appendChild(createDiv);
 
 // Event listener to clear scores
 var clear = document.querySelector("#clear");

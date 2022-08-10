@@ -22,7 +22,7 @@ function timer() {
       // Stops execution of action at set interval
       clearInterval(countDown);
 
-      // quizContainer.classList.add("hide");
+      quizContainer.classList.add("hide");
       // Calls function to create and append image
       sendMessage();
     }
@@ -32,14 +32,14 @@ function timer() {
 
 
 // Calculates time remaining and replaces it with score
-//   if (secondsLeft >= 0) {
-//     var timeRemaining = secondsLeft;
-//     var yourScore = document.querySelector(".your-score");
-//     // clearInterval(holdinterval);
-//     yourScore.textContent = "Your final score is: " + timeRemaining;
+  if (secondsLeft >= 0) {
+    var timeRemaining = secondsLeft;
+    var yourScore = document.querySelector(".your-score");
+    // clearInterval(holdinterval);
+    yourScore.textContent = "Your final score is: " + timeRemaining;
 
-//     scoreScreen.appendChild("your-score");
-// };
+    scoreScreen.appendChild("your-score");
+};
 
 //Once time runs out, this sends a message with image describing that it's over and that the user has lost
 function sendMessage() {

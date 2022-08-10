@@ -5,7 +5,7 @@ var timerEl = document.querySelector(".timer");
 var quizContainer = document.querySelector("#quiz");
 var finalScoreContainer = document.querySelector(".finalscore");
 var score = 0;
-var secondsLeft = 100;
+var secondsLeft = 60;
 var penalty = 5;
 var delay = 3;
 var currentQuestionIndex = 0;
@@ -35,7 +35,7 @@ function timer() {
   if (secondsLeft >= 0) {
     var timeRemaining = secondsLeft;
     var yourScore = document.querySelector(".your-score");
-    // clearInterval(holdinterval);
+    clearInterval(holdinterval);
     yourScore.textContent = "Your final score is: " + timeRemaining;
 
     scoreScreen.appendChild("your-score");
@@ -182,7 +182,7 @@ function startQuiz() {
     questionString.textContent = currentQuestion.question;
     quizContainer.appendChild(questionString);
     console.log(quizContainer);
-    // quizContainer.style.display = "initial";
+    quizContainer.style.display = "initial";
     quizContainer.appendChild(questionsList);
     console.log(currentQuestion.choices);
 
@@ -190,7 +190,7 @@ function startQuiz() {
       var liEl = document.createElement("li");
       questionsList.appendChild(liEl);
       liEl.textContent = currentQuestion.choices[i];
-      // clearInterval(countDown);
+      clearInterval(countDown);
       liEl.addEventListener("click", function (event) {
         var createDiv = document.createElement("div");
         createDiv.setAttribute("id", "createDiv");
